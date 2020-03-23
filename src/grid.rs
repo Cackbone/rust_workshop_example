@@ -11,29 +11,12 @@ pub struct Grid {
 }
 
 
-impl fmt::Display for Grid {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        let line = format!(
-            "■{}■\n", "▬".repeat(self.width)
-        );
-        let cells_str: String = self.cells.iter().map(|line| {
-            let line_cells: String = line.iter().map(|cell| {
-                cell.to_string()
-            }).collect();
-            format!("|{}|\n", line_cells)
-
-        }).collect();
-
-        write!(f, "{}{}{}", line, cells_str, line)
-    }
-}
-
 
 impl Grid {
     pub fn new(width: usize, height: usize) -> Grid {
         let cells: Vec<Vec<Cell>> = (0..height).map(|y| {
             (0..width)
-                .map(|x| Cell::new(x, y, true))
+                .map(|x| Cell::new(x, y, false))
                 .collect()
         }).collect();
 
@@ -90,4 +73,22 @@ impl Grid {
         counter
     }
 
+}
+
+
+impl fmt::Display for Grid {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        let line = format!(
+            "■{}■\n", "▬".repeat(self.width)
+        );
+        let cells_str: String = self.cells.iter().map(|line| {
+            let line_cells: String = line.iter().map(|cell| {
+                cell.to_string()
+            }).collect();
+            format!("|{}|\n", line_cells)
+
+        }).collect();
+
+        write!(f, "{}{}{}", line, cells_str, line)
+    }
 }

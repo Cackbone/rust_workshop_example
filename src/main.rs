@@ -3,8 +3,8 @@ use std::error::Error;
 
 use game_of_life::Grid;
 
-fn main() -> Result<(), Box<dyn Error>>{
-    let mut grid = Grid::new_rand(100, 100, 0.01);
+fn main() -> Result<(), Box<dyn Error>> {
+    let mut grid = Grid::new_rand(100, 100, 0.5);
     let mut gen = 0;
     let mut i = String::new();
 
